@@ -34,4 +34,16 @@ exports.verifyRegister = async(req, res, next) => {
 
     }
     next();
+};
+
+
+exports.sellers = async(req, res, next) => {
+    const check = await User.findOne({ role: constants.role.sellers })
+    if (!check) {
+        return res.status(400).json({
+            message: "APPLICABLE FOR SELLERS",
+
+        })
+    }
+    next();
 }

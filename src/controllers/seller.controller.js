@@ -3,6 +3,7 @@ const User = require('../model/user');
 const constant = require('../utils/constansts');
 const catalog = require('../model/catalog');
 const product = require('../model/product');
+const order = require('../model/order')
 
 exports.addcatalog = async(req, res) => {
     try {
@@ -42,4 +43,21 @@ exports.addProduct = async(req, res) => {
             Error: err.message
         })
     })
+}
+
+exports.getOrder = async(req, res) => {
+    try {
+        const AllOrders = await order.find();
+        console.log(AllOrders);
+        return res.status(200).json({
+            message: true,
+            Orders: AllOrders
+        })
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json({
+            message: false,
+            Error: err.message
+        })
+    }
 }
